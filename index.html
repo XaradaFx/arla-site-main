@@ -4,42 +4,75 @@
   <meta charset="UTF-8" />
   <title>🌌 Bem-vindo à Dimensão Arla</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <style>
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
       background-color: #0e0e10;
       color: white;
+      overflow-x: hidden;
+    }
+
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 100px auto 60px auto;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-size: 2.7rem;
+      color: #a259ff;
+      margin-bottom: 50px;
+      text-shadow: 0 0 20px rgba(162, 89, 255, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
     }
 
     .menu {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 15px;
-      padding: 40px 0;
+      gap: 20px;
     }
 
     .menu a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #a259ff, #7b2ff7);
       color: white;
-      background-color: rgba(255,255,255,0.05);
-      padding: 12px 20px;
-      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 16px 30px;
+      border-radius: 20px;
       text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(162, 89, 255, 0.2);
-      transition: background 0.3s ease;
+      width: 100%;
+      max-width: 350px;
+      box-shadow: 0 0 12px rgba(162, 89, 255, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
 
     .menu a:hover {
-      background-color: rgba(162, 89, 255, 0.2);
+      transform: scale(1.04);
+      box-shadow: 0 0 20px rgba(162, 89, 255, 0.5);
     }
 
-    h1 {
-      text-align: center;
-      color: #a259ff;
-      margin-top: 50px;
-      text-shadow: 0 0 10px rgba(162, 89, 255, 0.5);
+    .menu a span {
+      font-size: 1.5rem;
     }
 
     footer {
@@ -47,25 +80,39 @@
       padding: 20px;
       font-size: 0.9rem;
       color: #aaa;
-      margin-top: 50px;
+      margin-top: 60px;
     }
   </style>
 </head>
 <body>
-  <h1>🌌 Bem-vindo à Dimensão Arla</h1>
+  <div id="tsparticles"></div>
 
-  <div class="menu">
-    <a href="battlepass.html" class="menu-link">🎯 Passe de Batalha</a>
-    <a href="perfil.html">👤 Perfil do Usuário</a>
-    <a href="ranking_xp.html">🏆 Ranking de XP</a>
-    <a href="ranking_tempo.html">⏳ Ranking de Tempo em Call</a>
-    <a href="carteira.html">💼 Carteira de Xaracoins</a>
+  <div class="container">
+    <h1>🌌 Bem-vindo à Dimensão Arla</h1>
+
+    <div class="menu">
+      <a href="battlepass.html"><span>🎯</span> Passe de Batalha</a>
+      <a href="perfil.html"><span>🧍</span> Perfil do Usuário</a>
+      <a href="ranking_xp.html"><span>🏆</span> Ranking de XP</a>
+      <a href="ranking_tempo.html"><span>⏳</span> Ranking de Tempo em Call</a>
+      <a href="carteira.html"><span>💼</span> Carteira de Xaracoins</a>
+    </div>
+
+    <footer>Feito com 💜 por Xarada & Arla</footer>
   </div>
 
-  <footer>Feito com 💜 por Xarada & Arla</footer>
-
-  <!-- 🔐 Verificação de login automática -->
   <script>
+    tsParticles.load("tsparticles", {
+      background: { color: { value: "#0e0e10" } },
+      particles: {
+        color: { value: "#a259ff" },
+        links: { enable: true, color: "#a259ff", distance: 130 },
+        move: { enable: true, speed: 1.2 },
+        size: { value: 2 },
+        number: { value: 60, density: { enable: true, area: 800 } }
+      }
+    });
+
     fetch("/api/me")
       .then(res => {
         if (res.status === 401) {
