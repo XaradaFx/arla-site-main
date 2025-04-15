@@ -16,7 +16,7 @@ app = Flask(__name__, static_url_path='', static_folder='.')
 app.secret_key = os.urandom(24)
 
 # Caminho do banco de dados (um nível acima da pasta do site)
-CAMINHO_DADOS = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "dados.json"))
+CAMINHO_DADOS = os.path.join(os.path.dirname(__file__), "dados.json")
 
 @app.route("/login")
 def login():
@@ -63,7 +63,8 @@ def pegar_dados_usuario(user_id):
             "xp": dados.get("xp", {}).get(user_id, 0),
             "tempo_total": dados.get("tempo_total", {}).get(user_id, 0),
             "nivel": int(dados.get("xp", {}).get(user_id, 0) // 250),
-            "xaracoins": dados.get("xaracoins", {}).get(user_id, 0)
+            "xaracoins": dados.get("xaracoins", {}).get(user_id, 0),
+            "barra": dados.get("barras", {}).get(user_id, {})
         }
         return jsonify(usuario)
     except FileNotFoundError:
