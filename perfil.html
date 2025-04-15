@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8"/>
   <title>Perfil - Arla</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     body {
       margin: 0;
@@ -11,113 +11,91 @@
       background-color: #0e0e10;
       color: white;
     }
-    #tsparticles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-    }
-    .container {
-      max-width: 800px;
-      margin: 100px auto;
-      background-color: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(6px);
+    .perfil-container {
+      max-width: 700px;
+      margin: 80px auto;
       padding: 30px;
       border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 0 30px rgba(162, 89, 255, 0.3);
       text-align: center;
-      box-shadow: 0 0 20px rgba(162, 89, 255, 0.3);
     }
     .banner {
-      width: 100%;
       height: 150px;
       border-radius: 12px;
-      background: center/cover no-repeat;
-      margin-bottom: 20px;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: -40px;
     }
-    .avatar {
+    #avatar {
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      margin-top: -50px;
       border: 3px solid #a259ff;
-      background: center/cover no-repeat;
-      margin-bottom: 10px;
+      background-size: cover;
+      background-position: center;
+      margin: 0 auto 10px auto;
+      position: relative;
+      z-index: 1;
     }
-    h2 { margin: 0; color: #a259ff; }
+    h2 {
+      color: #a259ff;
+      margin: 10px 0 0;
+    }
     .info {
       display: flex;
       justify-content: space-around;
       margin-top: 30px;
-      flex-wrap: wrap;
     }
-    .info-box {
+    .info div {
       text-align: center;
-      margin: 10px;
     }
-    .info-box h3 {
-      margin-bottom: 5px;
-      color: #a259ff;
+    .info div span {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 5px;
     }
-    .info-box p {
-      font-size: 1.2rem;
+    .voltar {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      color: white;
+      background: linear-gradient(135deg, #a259ff, #7b2ff7);
+      border-radius: 14px;
+      text-decoration: none;
+      box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
+      transition: transform 0.3s ease;
+    }
+    .voltar:hover {
+      transform: translateY(-3px);
     }
   </style>
 </head>
 <body>
-  <div id="tsparticles"></div>
-  <div class="container">
+  <div class="perfil-container">
     <div class="banner"></div>
-    <div class="avatar" id="avatar"></div>
+    <div id="avatar"></div>
     <h2>Usuário</h2>
-    <p>ID: <span id="userid" style="display:none;"></span></p>
-
+    <p>ID: <span id="userid">...</span></p>
     <div class="info">
-      <div class="info-box"><h3>XP</h3><p id="xp">...</p></div>
-      <div class="info-box"><h3>Nível</h3><p id="nivel">...</p></div>
-      <div class="info-box"><h3>Call</h3><p id="tempo">...</p></div>
-      <div class="info-box"><h3>Xaracoins</h3><p id="xaracoins">...</p></div>
+      <div><strong>XP</strong><span id="xp">...</span></div>
+      <div><strong>Nível</strong><span id="nivel">...</span></div>
+      <div><strong>Call</strong><span id="tempo">...</span></div>
+      <div><strong>Xaracoins</strong><span id="xaracoins">...</span></div>
     </div>
-
-    <div style="text-align:center; margin-top: 40px;">
-      <a href="index.html" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'" style="
-        display: inline-block;
-        padding: 12px 25px;
-        font-size: 1rem;
-        color: white;
-        background: linear-gradient(135deg, #a259ff, #7b2ff7);
-        border-radius: 14px;
-        text-decoration: none;
-        box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
-        transition: transform 0.3s ease;">
-        🔙 Voltar para o Menu
-      </a>
-    </div>
+    <a class="voltar" href="index.html">🔙 Voltar para o Menu</a>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <script>
-    tsParticles.load("tsparticles", {
-      background: { color: { value: "#0e0e10" } },
-      particles: {
-        color: { value: "#a259ff" },
-        links: { enable: true, color: "#a259ff", distance: 130 },
-        move: { enable: true, speed: 1.4 },
-        size: { value: 2 },
-        number: { value: 60, density: { enable: true, area: 800 } }
-      }
-    });
-
-    <script>
-  fetch("/api/me")
-    .then(res => {
-      if (res.status === 401) {
-        // Usuário não logado → redireciona para login
-        window.location.href = "/login";
-      }
-    });
-</script>
+    fetch("/api/me")
+      .then(res => {
+        if (res.status === 401) {
+          window.location.href = "/login";
+        }
+        return res.json();
+      })
       .then(user => {
         const userId = user.user_id;
         document.getElementById("userid").textContent = userId;
