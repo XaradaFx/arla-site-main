@@ -2,137 +2,76 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Arla - Portal Inicial</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <title>🌌 Bem-vindo à Dimensão Arla</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
+      margin: 0;
       font-family: 'Poppins', sans-serif;
       background-color: #0e0e10;
       color: white;
-      overflow: hidden;
-    }
-
-    #tsparticles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 2.8rem;
-      color: transparent;
-      background: linear-gradient(90deg, #a259ff, #7b2ff7, #a259ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      text-shadow: 0 0 25px rgba(162, 89, 255, 0.6);
-      margin-bottom: 40px;
-      animation: fadeIn 1s ease-in-out;
     }
 
     .menu {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      animation: fadeIn 1.4s ease-in-out;
+      align-items: center;
+      gap: 15px;
+      padding: 40px 0;
     }
 
     .menu a {
-      text-decoration: none;
-      font-size: 1.2rem;
       color: white;
-      padding: 15px 30px;
-      background: linear-gradient(135deg, #a259ff, #7b2ff7);
-      border: none;
-      border-radius: 18px;
-      box-shadow: 0 0 20px rgba(162, 89, 255, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: rgba(255,255,255,0.05);
+      padding: 12px 20px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(162, 89, 255, 0.2);
+      transition: background 0.3s ease;
     }
 
     .menu a:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 30px rgba(162, 89, 255, 0.6);
+      background-color: rgba(162, 89, 255, 0.2);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    h1 {
+      text-align: center;
+      color: #a259ff;
+      margin-top: 50px;
+      text-shadow: 0 0 10px rgba(162, 89, 255, 0.5);
     }
 
     footer {
-      position: absolute;
-      bottom: 20px;
-      font-size: 0.85rem;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
       color: #aaa;
+      margin-top: 50px;
     }
   </style>
 </head>
 <body>
-  <div id="tsparticles"></div>
-  <div class="container">
-    <h1>🌌 Bem-vindo à Dimensão Arla</h1>
-    <div class="menu">
-      <a href="battlepass.html" class="menu-link">🎯 Passe de Batalha</a>
-      <a href="perfil.html">👤 Perfil do Usuário</a>
-      <a href="ranking_xp.html">🏆 Ranking de XP</a>
-      <a href="ranking_tempo.html">⏳ Ranking de Tempo em Call</a>
-      <a href="carteira.html">💼 Carteira de Xaracoins</a>
-    </div>
-    <footer>Feito com 💜 por Xarada & Arla</footer>
+  <h1>🌌 Bem-vindo à Dimensão Arla</h1>
+
+  <div class="menu">
+    <a href="battlepass.html" class="menu-link">🎯 Passe de Batalha</a>
+    <a href="perfil.html">👤 Perfil do Usuário</a>
+    <a href="ranking_xp.html">🏆 Ranking de XP</a>
+    <a href="ranking_tempo.html">⏳ Ranking de Tempo em Call</a>
+    <a href="carteira.html">💼 Carteira de Xaracoins</a>
   </div>
 
-  <!-- Arla Falante carregada via fetch -->
-  <div id="arla-container"></div>
-  <script>
-    fetch("/static/components/arla_falante.html")
-      .then(res => res.text())
-      .then(html => {
-        const container = document.getElementById("arla-container");
-        container.innerHTML = html;
+  <footer>Feito com 💜 por Xarada & Arla</footer>
 
-        const scripts = container.querySelectorAll("script");
-        scripts.forEach(script => {
-          const s = document.createElement("script");
-          if (script.src) {
-            s.src = script.src;
-          } else {
-            s.textContent = script.textContent;
-          }
-          document.body.appendChild(s);
-        });
+  <!-- 🔐 Verificação de login automática -->
+  <script>
+    fetch("/api/me")
+      .then(res => {
+        if (res.status === 401) {
+          window.location.href = "/login";
+        }
       });
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-  <script>
-    tsParticles.load("tsparticles", {
-      background: { color: { value: "#0e0e10" } },
-      particles: {
-        color: { value: "#a259ff" },
-        links: { enable: true, color: "#a259ff", distance: 130 },
-        move: { enable: true, speed: 1.4 },
-        size: { value: 2 },
-        number: { value: 60, density: { enable: true, area: 800 } }
-      }
-    });
   </script>
 </body>
 </html>
