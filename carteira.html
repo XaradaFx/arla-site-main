@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<title>Carteira - Arla</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0e0e10;
+      color: white;
+    }
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
+    .container {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 30px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 0 30px rgba(162, 89, 255, 0.3);
+    }
+    h1 {
+      color: #a259ff;
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px rgba(162, 89, 255, 0.6);
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(162, 89, 255, 0.2);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 0 10px rgba(162, 89, 255, 0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card h3 {
+      color: #a259ff;
+      margin-bottom: 8px;
+    }
+    .big {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+    .rendimento-area {
+      margin-top: 30px;
+    }
+    .bar-outer {
+      background: #2a2a2a;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(to right, #67ff94, #a259ff);
+      width: 65%;
+      animation: growBar 3s ease-out;
+    }
+    @keyframes growBar {
+      0% { width: 0; }
+      100% { width: 65%; }
+    }
+    .badge {
+      padding: 4px 10px;
+      border-radius: 20px;
+      background-color: #a259ff;
+      color: white;
+      font-size: 0.8rem;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+<div id="tsparticles"></div>
+<div class="container">
+<h1>💼 Carteira de Xaracoins</h1>
+<div class="card">
+<div>
+<h3>Saldo Atual</h3>
+<div class="big" id="xaracoins">0</div>
+</div>
+<div style="text-align: right;">
+<h3>Simulação de Rendimento</h3>
+<div>💸 +2.5% ao mês</div>
+<div class="bar-outer"><div class="bar-fill"></div></div>
+<div class="badge">Estimado</div>
+</div>
+</div>
+<div class="rendimento-area">
+<h3 style="color: #a259ff">💹 Crescimento futuro dos seus Xaracoins</h3>
+<p style="color: #bbb; margin-top: 5px;">Valor simulado com base na sua média de ganho atual.</p>
+</div>
+<div>
+<div style="text-align:center; margin-top: 40px;">
+<a href="index.html" onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-3px)'" style="
+                display: inline-block;
+                padding: 12px 25px;
+                font-size: 1rem;
+                color: white;
+                background: linear-gradient(135deg, #a259ff, #7b2ff7);
+                border-radius: 14px;
+                text-decoration: none;
+                box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
+                transition: transform 0.3s ease;
+              ">
+                🔙 Voltar para o Menu
+              </a>
+</div>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+<script>
+    const userId = "699507632641278023";
+    tsParticles.load("tsparticles", {
+      background: { color: { value: "#0e0e10" } },
+      particles: {
+        color: { value: "#a259ff" },
+        links: { enable: true, color: "#a259ff", distance: 130 },
+        move: { enable: true, speed: 1.2 },
+        size: { value: 2 },
+        number: { value: 60, density: { enable: true, area: 800 } }
+      }
+    });
+    fetch(`/api/usuario/${userId}`).then(res => res.json()).then(data => {
+      document.getElementById("xaracoins").textContent = data.xaracoins;
+    });
+  </script>
+</body>
+</html>
