@@ -123,9 +123,8 @@ def get_avatar(user_id):
 def home():
     return send_from_directory('.', 'index.html')
 
-@app.route('/<path:path>')
-def serve_html(path):
-    return send_from_directory('.', path)
-
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=10000)
+    from waitress import serve
+    import os
+    serve(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
