@@ -130,17 +130,34 @@ def ranking_xp():
             dados = json.load(f)
 
         lista = sorted(dados.get("xp", {}).items(), key=lambda x: x[1], reverse=True)
+        top30 = lista[:30]
 
-        resultado = [
-            {
-                "nome": dados.get("nomes", {}).get(user_id, f"ID: {user_id}"),
+        resultado = []
+        headers = {"Authorization": f"Bot {BOT_TOKEN}"}
+
+        for user_id, xp in top30:
+            nome_salvo = dados.get("nomes", {}).get(user_id, f"ID: {user_id}")
+            avatar_url = f"https://cdn.discordapp.com/embed/avatars/{int(user_id) % 5}.png"
+
+            try:
+                r = requests.get(f"https://discord.com/api/v10/users/{user_id}", headers=headers)
+                if r.status_code == 200:
+                    user_data = r.json()
+                    nome_salvo = user_data.get("global_name") or user_data.get("username", nome_salvo)
+                    avatar = user_data.get("avatar")
+                    if avatar:
+                        avatar_url = f"https://cdn.discordapp.com/avatars/{user_id}/{avatar}.png"
+            except:
+                pass  # Se falhar, mantém os dados padrão
+
+            resultado.append({
+                "nome": nome_salvo,
                 "xp": xp,
-                "avatar_url": f"https://cdn.discordapp.com/embed/avatars/{int(user_id) % 5}.png"
-            }
-            for user_id, xp in lista[:30]  # top 30
-        ]
+                "avatar_url": avatar_url
+            })
 
         return jsonify(resultado)
+
     except Exception as e:
         return jsonify({"erro": str(e)}), 500
 
