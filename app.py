@@ -59,10 +59,9 @@ def pegar_dados_usuario(user_id):
     try:
         with open(CAMINHO_DADOS, "r", encoding="utf-8") as f:
             dados = json.load(f)
-        tempo = dados.get("tempo_total", {}).get(user_id, 0)
         usuario = {
             "xp": dados.get("xp", {}).get(user_id, 0),
-            "tempo_total": f"{tempo} min",
+            "tempo_total": dados.get("tempo_total", {}).get(user_id, 0),
             "nivel": int(dados.get("xp", {}).get(user_id, 0) // 250),
             "xaracoins": dados.get("xaracoins", {}).get(user_id, 0),
             "barra": dados.get("barras", {}).get(user_id, {})
@@ -128,3 +127,4 @@ if __name__ == "__main__":
     from waitress import serve
     import os
     serve(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
