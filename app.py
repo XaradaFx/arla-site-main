@@ -123,6 +123,27 @@ def get_avatar(user_id):
 def home():
     return send_from_directory('.', 'index.html')
 
+@app.route("/api/ranking/xp")
+def ranking_xp():
+    try:
+        with open(CAMINHO_DADOS, "r", encoding="utf-8") as f:
+            dados = json.load(f)
+
+        lista = sorted(dados.get("xp", {}).items(), key=lambda x: x[1], reverse=True)
+
+        resultado = [
+            {
+                "nome": dados.get("nomes", {}).get(user_id, f"ID: {user_id}"),
+                "xp": xp,
+                "avatar_url": f"https://cdn.discordapp.com/embed/avatars/{int(user_id) % 5}.png"
+            }
+            for user_id, xp in lista[:30]  # top 30
+        ]
+
+        return jsonify(resultado)
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 500
+
 if __name__ == "__main__":
     from waitress import serve
     import os
