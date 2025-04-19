@@ -47,6 +47,26 @@ def callback():
     session["user_id"] = user_data["id"]
     return redirect("/perfil.html")
 
+@app.route("/api/ranking/xp")
+def ranking_xp():
+    try:
+        with open(CAMINHO_DADOS, "r", encoding="utf-8") as f:
+            dados = json.load(f)
+
+        lista = sorted(dados.get("xp", {}).items(), key=lambda x: x[1], reverse=True)
+
+        resultado = [
+            {
+                "nome": dados.get("nomes", {}).get(user_id, f"ID: {user_id}"),
+                "xp": xp
+            }
+            for user_id, xp in lista
+        ]
+
+        return jsonify(resultado)
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 500
+
 @app.route("/api/me")
 def get_user_id():
     user_id = session.get("user_id")
