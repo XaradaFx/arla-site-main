@@ -47,45 +47,6 @@ def callback():
     session["user_id"] = user_data["id"]
     return redirect("/perfil.html")
 
-@app.route("/api/ranking/xp")
-def ranking_xp():
-    try:
-        with open(CAMINHO_DADOS, "r", encoding="utf-8") as f:
-            dados = json.load(f)
-
-        lista = sorted(dados.get("xp", {}).items(), key=lambda x: x[1], reverse=True)[:30]
-
-        resultado = []
-        for user_id, xp in lista:
-            nome = dados.get("nomes", {}).get(user_id, f"ID: {user_id}")
-
-            avatar_url = f"https://cdn.discordapp.com/embed/avatars/{int(user_id) % 5}.png"
-            banner_url = None
-            username = nome
-
-            # Tenta buscar avatar real (opcional para performance)
-            try:
-                headers = {"Authorization": f"Bot {BOT_TOKEN}"}
-                r = requests.get(f"https://discord.com/api/v10/users/{user_id}", headers=headers)
-                if r.status_code == 200:
-                    user_data = r.json()
-                    avatar = user_data.get("avatar")
-                    username = user_data.get("global_name") or user_data.get("username", nome)
-                    if avatar:
-                        avatar_url = f"https://cdn.discordapp.com/avatars/{user_id}/{avatar}.png"
-            except:
-                pass
-
-            resultado.append({
-                "nome": username,
-                "xp": xp,
-                "avatar_url": avatar_url
-            })
-
-        return jsonify(resultado)
-    except Exception as e:
-        return jsonify({"erro": str(e)}), 500
-
 @app.route("/api/me")
 def get_user_id():
     user_id = session.get("user_id")
@@ -98,9 +59,10 @@ def pegar_dados_usuario(user_id):
     try:
         with open(CAMINHO_DADOS, "r", encoding="utf-8") as f:
             dados = json.load(f)
+        tempo = dados.get("tempo_total", {}).get(user_id, 0)
         usuario = {
             "xp": dados.get("xp", {}).get(user_id, 0),
-            "tempo_total": dados.get("tempo_total", {}).get(user_id, 0),
+            "tempo_total": f"{tempo} min",
             "nivel": int(dados.get("xp", {}).get(user_id, 0) // 250),
             "xaracoins": dados.get("xaracoins", {}).get(user_id, 0),
             "barra": dados.get("barras", {}).get(user_id, {})
@@ -165,4 +127,4 @@ def home():
 if __name__ == "__main__":
     from waitress import serve
     import os
-    serve(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), threads=12)
+    serve(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
