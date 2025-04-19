@@ -1,161 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Ranking de XP</title>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <meta charset="utf-8"/>
+  <title>Ranking XP - Arla</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
     body {
-      font-family: 'Comfortaa', cursive;
-      background: #a259ff;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #0e0e10;
+      color: white;
       overflow-x: hidden;
     }
     #tsparticles {
       position: fixed;
-      width: 100%;
-      height: 100%;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       z-index: -1;
     }
-    .titulo {
-      text-align: center;
-      margin-top: 40px;
-      color: white;
+    .container {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
+    h1 {
       font-size: 2.5rem;
+      color: #a259ff;
+      text-align: center;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px rgba(162, 89, 255, 0.6);
     }
-    .ranking {
+    .user {
+      background: rgba(255,255,255,0.04);
+      padding: 15px 25px;
+      border-radius: 14px;
+      margin-bottom: 15px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      margin-top: 30px;
       gap: 15px;
+      border: 1px solid transparent;
+      transition: 0.3s ease;
     }
-    .rank-card {
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.12);
-      padding: 14px 20px;
-      border-radius: 16px;
-      width: 90%;
-      max-width: 500px;
-      gap: 15px;
-      backdrop-filter: blur(5px);
-      color: white;
+    .user:hover {
+      border: 1px solid #a259ff;
+      box-shadow: 0 0 10px rgba(162, 89, 255, 0.3);
+      transform: translateY(-3px);
     }
     .avatar {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      border: 2px solid white;
-    }
-    .rank-info {
-      display: flex;
-      flex-direction: column;
-    }
-    .posicao {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-    .nome {
-      font-size: 1.1rem;
-    }
-    .xp {
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-    .rank-card.gold {
-      background: linear-gradient(135deg, #FFD700, #FFC700);
-    }
-    .rank-card.silver {
-      background: linear-gradient(135deg, #C0C0C0, #B0B0B0);
-    }
-    .rank-card.bronze {
-      background: linear-gradient(135deg, #CD7F32, #C07020);
-    }
-    .voltar {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: white;
-      color: #6b5bff;
-      padding: 10px 18px;
-      border-radius: 50px;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-      font-family: 'Comfortaa', cursive;
-    }
-    .musica {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: white;
-      border-radius: 50%;
       width: 50px;
       height: 50px;
-      font-size: 22px;
-      border: none;
-      cursor: pointer;
+      border-radius: 50%;
+      background-color: #333;
+      background-size: cover;
+      background-position: center;
+    }
+    .info {
+      flex-grow: 1;
+    }
+    .bar {
+      height: 10px;
+      background: #333;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #a259ff, #7b2ff7);
+      transition: width 0.4s ease;
+    }
+    .value {
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <div id="tsparticles"></div>
-  <h1 class="titulo">🏆 Ranking de XP</h1>
-  <div class="ranking" id="ranking"></div>
+  <div class="container">
+    <h1>🏆 Ranking XP com Avatar</h1>
+    <div id="ranking">Carregando...</div>
 
-  <button class="voltar" onclick="window.location.href='index.html'">⬅ Voltar</button>
-  <button class="musica" onclick="document.getElementById('bgm').play()">🎵</button>
-  <audio id="bgm" src="musica-arla.mp3" loop></audio>
+    <div style="text-align:center; margin-top: 40px;">
+      <a href="index.html" onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-3px)'" style="
+        display: inline-block;
+        padding: 12px 25px;
+        font-size: 1rem;
+        color: white;
+        background: linear-gradient(135deg, #a259ff, #7b2ff7);
+        border-radius: 14px;
+        text-decoration: none;
+        box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
+        transition: transform 0.3s ease;">
+        🔙 Voltar para o Menu
+      </a>
+    </div>
+  </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <script>
     tsParticles.load("tsparticles", {
+      background: { color: { value: "#0e0e10" } },
       particles: {
-        number: { value: 80 },
-        color: { value: "#ffffff" },
-        shape: { type: "circle" },
-        opacity: { value: 0.5 },
-        size: { value: 3 },
-        move: { enable: true, speed: 1 }
+        color: { value: "#a259ff" },
+        links: { enable: true, color: "#a259ff", distance: 130 },
+        move: { enable: true, speed: 1.2 },
+        size: { value: 2 },
+        number: { value: 70, density: { enable: true, area: 800 } }
       }
     });
 
-    fetch("/api/me").then(res => {
-      if (res.status === 401) location.href = "/login";
-      return res.json();
-    }).then(() => {
-      fetch("/api/ranking/xp").then(res => res.json()).then(data => {
-        const container = document.getElementById("ranking");
+    fetch("/api/todos").then(res => res.json()).then(async data => {
+      const lista = Object.entries(data)
+        .map(([id, val]) => ({ id, xp: val.xp }))
+        .sort((a, b) => b.xp - a.xp);
 
-        data.forEach((usuario, i) => {
-          const id = usuario.nome.replace("ID: ", "").trim();
+      const container = document.getElementById("ranking");
+      container.innerHTML = "";
 
-          fetch(`/api/avatar/${id}`).then(res => res.json()).then(avatarData => {
-            const card = document.createElement("div");
-            card.classList.add("rank-card");
+      for (let i = 0; i < lista.length; i++) {
+        const user = lista[i];
+        const percent = Math.min((user.xp % 250) / 250 * 100, 100).toFixed(1);
 
-            if (i === 0) card.classList.add("gold");
-            else if (i === 1) card.classList.add("silver");
-            else if (i === 2) card.classList.add("bronze");
+        const res = await fetch(`/api/avatar/${user.id}`);
+        const avatarData = await res.json();
 
-            card.innerHTML = \`
-              <img src="\${avatarData.url}" class="avatar" />
-              <div class="rank-info">
-                <p class="posicao">#\${i + 1}</p>
-                <p class="nome">\${avatarData.name}</p>
-                <p class="xp">\${usuario.xp.toFixed(2)} XP</p>
-              </div>
-            \`;
+        const avatarUrl = avatarData.url || "https://cdn.discordapp.com/embed/avatars/0.png";
+        const nome = avatarData.name || `ID: ${user.id}`;
 
-            container.appendChild(card);
-          });
-        });
-      });
+        const div = document.createElement("div");
+        div.className = "user";
+        div.innerHTML = `
+          <div class="avatar" style="background-image: url('${avatarUrl}')"></div>
+          <div class="info">
+            <div>#${i + 1} • ${nome}</div>
+            <div class="bar"><div class="bar-fill" style="width:${percent}%"></div></div>
+          </div>
+          <div class="value">${user.xp.toFixed(2)} XP</div>
+        `;
+        container.appendChild(div);
+      }
     });
   </script>
 </body>
