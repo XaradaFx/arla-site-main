@@ -1,206 +1,162 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8"/>
-  <title>Ranking XP - Arla</title>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8" />
+  <title>Ranking de XP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Comfortaa', cursive;
-      background-color: #a259ff;
-      background-image: url('91a4d4c4-d3cf-47f1-8858-30bdcf9b7209.png');
-      background-size: cover;
-      background-repeat: repeat-y;
-      background-position: center top;
-      animation: scrollBackground 60s linear infinite;
-      min-height: 100vh;
+      background: #a259ff;
       overflow-x: hidden;
-      position: relative;
-      padding: 40px 20px;
-      color: white;
     }
-
-    @keyframes scrollBackground {
-      0% { background-position-y: 0; }
-      100% { background-position-y: 1000px; }
-    }
-
     #tsparticles {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       z-index: -1;
-      pointer-events: none;
     }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 30px;
-      background: linear-gradient(to right, #ffffff, #b48cff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: pulseGlow 3s ease-in-out infinite;
+    .titulo {
       text-align: center;
-    }
-
-    .ranking-container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.04);
-      padding: 30px;
-      border-radius: 18px;
-      box-shadow: 0 0 30px rgba(162, 89, 255, 0.3);
-    }
-
-    .usuario {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      margin-bottom: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.05);
-    }
-
-    .usuario.top1 { background: linear-gradient(90deg, #ffd70033, #ffffff05); }
-    .usuario.top2 { background: linear-gradient(90deg, #c0c0c033, #ffffff05); }
-    .usuario.top3 { background: linear-gradient(90deg, #cd7f3233, #ffffff05); }
-
-    .usuario span {
-      font-size: 1.2rem;
-    }
-
-    .voltar {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 12px 25px;
-      font-size: 1rem;
+      margin-top: 40px;
       color: white;
-      background: linear-gradient(135deg, #a259ff, #7b2ff7);
-      border-radius: 14px;
-      text-decoration: none;
-      box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
-      transition: transform 0.3s ease;
+      font-size: 2.5rem;
     }
-
-    .voltar:hover {
-      transform: translateY(-3px);
+    .ranking {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+      gap: 15px;
     }
-
-    @keyframes pulseGlow {
-      0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
-      50% { text-shadow: 0 0 25px rgba(255,255,255,0.6); }
+    .rank-card {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 14px 20px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 500px;
+      gap: 15px;
+      backdrop-filter: blur(5px);
+      color: white;
+    }
+    .avatar {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+    .rank-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .posicao {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .nome {
+      font-size: 1.1rem;
+    }
+    .xp {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+    .rank-card.gold {
+      background: linear-gradient(135deg, #FFD700, #FFC700);
+    }
+    .rank-card.silver {
+      background: linear-gradient(135deg, #C0C0C0, #B0B0B0);
+    }
+    .rank-card.bronze {
+      background: linear-gradient(135deg, #CD7F32, #C07020);
+    }
+    .voltar {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: white;
+      color: #6b5bff;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      font-family: 'Comfortaa', cursive;
+    }
+    .musica {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 22px;
+      border: none;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
   <div id="tsparticles"></div>
-  <h1>🏆 Ranking de XP</h1>
+  <h1 class="titulo">🏆 Ranking de XP</h1>
+  <div class="ranking" id="ranking"></div>
 
-  <div class="ranking-container" id="ranking">
-    <!-- Conteúdo será carregado via JavaScript -->
-  </div>
-
-  <a class="voltar" href="index.html">🔙 Voltar para o Menu</a>
-
-  <button id="btn-musica" style="
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background: #7b2ff7;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 100;
-    box-shadow: 0 0 12px rgba(0,0,0,0.2);">🔊 Tocar Música</button>
-
-  <audio id="musicaArla" loop>
-    <source src="musica-arla.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
-  </audio>
+  <button class="voltar" onclick="window.location.href='index.html'">⬅ Voltar</button>
+  <button class="musica" onclick="document.getElementById('bgm').play()">🎵</button>
+  <audio id="bgm" src="musica-arla.mp3" loop></audio>
 
   <script>
     tsParticles.load("tsparticles", {
-      fullScreen: { enable: false },
-      background: { color: "transparent" },
       particles: {
-        number: { value: 40, density: { enable: true, area: 800 } },
-        color: { value: ["#ffffff", "#d6b4ff", "#b266ff", "#f7d0ff"] },
-        shape: { type: ["circle", "triangle", "star"] },
-        opacity: { value: 0.5, random: true },
-        size: { value: { min: 10, max: 20 }, random: true },
-        move: {
-          enable: true,
-          speed: 1.2,
-          direction: "top",
-          outModes: "out"
-        },
-        rotate: {
-          value: 0,
-          random: true,
-          direction: "random",
-          animation: { enable: true, speed: 8, sync: false }
-        },
-        shadow: {
-          enable: true,
-          color: "#000",
-          blur: 5,
-          offset: { x: 1, y: 1 }
-        }
+        number: { value: 80 },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: 3 },
+        move: { enable: true, speed: 1 }
       }
     });
 
-    const btn = document.getElementById("btn-musica");
-    const audio = document.getElementById("musicaArla");
-    let tocando = false;
-
-    window.addEventListener("click", () => {
-      if (!tocando) {
-        audio.play().then(() => {
-          tocando = true;
-          btn.innerText = "🔇 Pausar Música";
-        }).catch(e => console.log("Erro ao tocar automaticamente:", e));
-      }
-    }, { once: true });
-
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (!tocando) {
-        audio.play().then(() => {
-          tocando = true;
-          btn.innerText = "🔇 Pausar Música";
-        }).catch(e => console.log("Erro ao tocar:", e));
-      } else {
-        audio.pause();
-        tocando = false;
-        btn.innerText = "🔊 Tocar Música";
-      }
-    });
-
-    fetch("/api/ranking/xp")
-      .then(res => res.json())
-      .then(data => {
+    fetch("/api/me").then(res => {
+      if (res.status === 401) location.href = "/login";
+      return res.json();
+    }).then(() => {
+      fetch("/api/ranking/xp").then(res => res.json()).then(data => {
         const container = document.getElementById("ranking");
-        data.forEach((usuario, index) => {
-          const div = document.createElement("div");
-          div.className = "usuario";
-          if (index === 0) div.classList.add("top1");
-          if (index === 1) div.classList.add("top2");
-          if (index === 2) div.classList.add("top3");
 
-          div.innerHTML = `<span>#${index + 1}</span><span>${usuario.nome}</span><span>${usuario.xp} XP</span>`;
-          container.appendChild(div);
+        data.forEach((usuario, i) => {
+          const id = usuario.nome.replace("ID: ", "").trim();
+
+          fetch(`/api/avatar/${id}`).then(res => res.json()).then(avatarData => {
+            const card = document.createElement("div");
+            card.classList.add("rank-card");
+
+            if (i === 0) card.classList.add("gold");
+            else if (i === 1) card.classList.add("silver");
+            else if (i === 2) card.classList.add("bronze");
+
+            card.innerHTML = \`
+              <img src="\${avatarData.url}" class="avatar" />
+              <div class="rank-info">
+                <p class="posicao">#\${i + 1}</p>
+                <p class="nome">\${avatarData.name}</p>
+                <p class="xp">\${usuario.xp.toFixed(2)} XP</p>
+              </div>
+            \`;
+
+            container.appendChild(card);
+          });
         });
       });
+    });
   </script>
 </body>
 </html>
