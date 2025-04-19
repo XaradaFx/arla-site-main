@@ -138,7 +138,8 @@
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById("ranking");
-        const promessas = data.map((usuario, index) => {
+        const top50 = data.slice(0, 50);
+        const promessas = top50.map((usuario, index) => {
           const id = usuario.nome.replace("ID: ", "").trim();
           return fetch(`/api/avatar/${id}`)
             .then(res => res.json())
