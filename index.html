@@ -2,135 +2,248 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>🌌 Bem-vindo à Dimensão Arla</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bem-vindo à Dimensão Arla</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #0e0e10;
-      color: white;
-      overflow-x: hidden;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Comfortaa', cursive;
+      background-color: #a259ff;
+      background-image: url('91a4d4c4-d3cf-47f1-8858-30bdcf9b7209.png');
+      background-size: cover;
+      background-repeat: repeat-y;
+      background-position: center top;
+      animation: scrollBackground 60s linear infinite;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes scrollBackground {
+      0% { background-position-y: 0; }
+      100% { background-position-y: 1000px; }
     }
 
     #tsparticles {
-      position: fixed;
+      position: absolute;
+      width: 100%;
+      height: 100%;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
+      z-index: 1;
+      pointer-events: none;
     }
 
     .container {
-      max-width: 600px;
-      margin: 100px auto 60px auto;
-      text-align: center;
-      padding: 0 20px;
-    }
-
-    h1 {
-      font-size: 2.7rem;
-      color: #a259ff;
-      margin-bottom: 50px;
-      text-shadow: 0 0 20px rgba(162, 89, 255, 0.6);
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 15px;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 100vh;
+      position: relative;
+      z-index: 2;
     }
 
-    .menu {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
+    .arla-img {
+      height: 100vh;
+      animation: float 6s ease-in-out infinite, spinScale 12s ease-in-out infinite;
     }
 
-    .menu a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #a259ff, #7b2ff7);
+    .right-side {
       color: white;
+      max-width: 500px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .right-side h1 {
+      font-size: 3.4rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      background: linear-gradient(to right, #ffffff, #b48cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulseGlow 3s ease-in-out infinite;
+      transform: rotate(-2deg) skewX(-2deg);
+    }
+
+    .right-side h1 span {
+      font-size: 2.5rem;
+    }
+
+    .right-side p {
       font-size: 1.2rem;
-      font-weight: 600;
-      padding: 16px 30px;
-      border-radius: 20px;
+      margin-bottom: 30px;
+      color: #e0d4ff;
+    }
+
+    .buttons a {
+      display: inline-block;
+      margin: 10px 10px 0 0;
+      padding: 16px 28px;
+      font-size: 1.1rem;
+      color: white;
       text-decoration: none;
-      width: 100%;
-      max-width: 350px;
-      box-shadow: 0 0 12px rgba(162, 89, 255, 0.35);
+      border-radius: 14px;
+      font-weight: 600;
       transition: transform 0.2s ease, box-shadow 0.3s ease;
+      animation: bounceIn 1s ease-in-out;
     }
 
-    .menu a:hover {
-      transform: scale(1.04);
-      box-shadow: 0 0 20px rgba(162, 89, 255, 0.5);
+    .status {
+      background: linear-gradient(135deg, #7b2ff7, #a259ff);
+      box-shadow: 0 0 15px rgba(162, 89, 255, 0.7);
     }
 
-    .menu a span {
-      font-size: 1.5rem;
+    .atualizacoes {
+      background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.7);
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-top: 60px;
+    .buttons a:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 22px rgba(255,255,255,0.4);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes spinScale {
+      0%   { transform: rotate(0deg) scale(1); }
+      25%  { transform: rotate(1deg) scale(1.02); }
+      50%  { transform: rotate(0deg) scale(1.03); }
+      75%  { transform: rotate(-1deg) scale(1.02); }
+      100% { transform: rotate(0deg) scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+      50% { text-shadow: 0 0 25px rgba(255,255,255,0.6); }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      60% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
     }
   </style>
 </head>
 <body>
   <div id="tsparticles"></div>
 
-  <div class="container">
-    <h1>🌌 Bem-vindo à Dimensão Arla</h1>
-
-    <div class="menu">
-      <a href="battlepass.html"><span>🎯</span> Passe de Batalha</a>
-      <a href="perfil.html"><span>🧍</span> Perfil do Usuário</a>
-      <a href="ranking_xp.html"><span>🏆</span> Ranking de XP</a>
-      <a href="ranking_tempo.html"><span>⏳</span> Ranking de Tempo em Call</a>
-      <a href="carteira.html"><span>💼</span> Carteira de Xaracoins</a>
+  <div class="container" style="justify-content: center; gap: 50px;">
+    <img class="arla-img" src="https://i.imgur.com/fpB5OfD.png" alt="Arla e Xarada" style="max-height: 90vh;"/>
+    <div class="right-side" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+  <h1 style="font-size: 4.2rem;">Bem-vindo à <strong>Dimensão Arla</strong></h1>
+  <p>Explore seu universo com um clique!</p>
+  <div class="buttons">
+      <a href="battlepass.html" class="status">🎯 Passe de Batalha</a>
+      <a href="perfil.html" class="status">👤 Perfil do Usuário</a>
+      <a href="ranking_xp.html" class="status">🏆 Ranking de XP</a>
+      <a href="ranking_tempo.html" class="status">⏳ Ranking de Tempo em Call</a>
+      <a href="carteira.html" class="atualizacoes">💼 Carteira de Xaracoins</a>
+      <a href="fanclub.html" class="atualizacoes">🌟 Fã Club da Arla</a>
     </div>
-
-    <footer>Feito com 💜 por Xarada & Arla</footer>
+    
+  </div>
+</div>
+</div>
   </div>
 
   <script>
     tsParticles.load("tsparticles", {
-      background: { color: { value: "#0e0e10" } },
+      fullScreen: { enable: false },
+      background: { color: "transparent" },
       particles: {
-        color: { value: "#a259ff" },
-        links: { enable: true, color: "#a259ff", distance: 130 },
-        move: { enable: true, speed: 1.2 },
-        size: { value: 2 },
-        number: { value: 60, density: { enable: true, area: 800 } }
+        number: { value: 40, density: { enable: true, area: 800 } },
+        color: { value: ["#ffffff", "#d6b4ff", "#b266ff", "#f7d0ff"] },
+        shape: { type: ["circle", "triangle", "star"] },
+        opacity: { value: 0.5, random: true },
+        size: { value: { min: 10, max: 20 }, random: true },
+        move: {
+          enable: true,
+          speed: 1.2,
+          direction: "top",
+          outModes: "out"
+        },
+        rotate: {
+          value: 0,
+          random: true,
+          direction: "random",
+          animation: { enable: true, speed: 8, sync: false }
+        },
+        shadow: {
+          enable: true,
+          color: "#000",
+          blur: 5,
+          offset: { x: 1, y: 1 }
+        }
       }
     });
-
-    fetch("/api/me")
-      .then(res => {
-        if (res.status === 401) {
-          window.location.href = "/login";
-        }
-      });
   </script>
+<button id="btn-musica" style="
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #7b2ff7;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+">🔊 Tocar Música</button>
+
+<audio id="musicaArla" loop>
+  <source src="musica-arla.mp3" type="audio/mpeg">
+  Seu navegador não suporta áudio.
+</audio>
+
+<script>
+  const btn = document.getElementById("btn-musica");
+  const audio = document.getElementById("musicaArla");
+  let tocando = false;
+
+  // Tocar no primeiro clique em qualquer lugar da tela
+  window.addEventListener("click", () => {
+    if (!tocando) {
+      audio.play().then(() => {
+        tocando = true;
+        btn.innerText = "🔇 Pausar Música";
+      }).catch(e => console.log("Erro ao tocar automaticamente:", e));
+    }
+  }, { once: true });
+
+  // Controle manual pelo botão
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (!tocando) {
+      audio.play().then(() => {
+        tocando = true;
+        btn.innerText = "🔇 Pausar Música";
+      }).catch(e => console.log("Erro ao tocar:", e));
+    } else {
+      audio.pause();
+      tocando = false;
+      btn.innerText = "🔊 Tocar Música";
+    }
+  });
+</script>
 </body>
 </html>
-
-<!-- Botão secreto invisível -->
-<a href="surpresa.html" style="
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  width: 40px;
-  height: 40px;
-  opacity: 0;
-  z-index: 999;
-  cursor: pointer;
-"></a>
