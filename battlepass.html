@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8"/>
   <title>Passe de Batalha - Arla</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #0e0e10;
-      color: white;
+      font-family: 'Comfortaa', cursive;
+      background-color: #a259ff;
+      background-image: url('https://i.imgur.com/91a4d4c.png');
+      background-size: cover;
+      background-repeat: repeat-y;
+      background-position: center top;
+      animation: scrollBackground 60s linear infinite;
+      min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
+      padding: 40px 20px;
+      color: white;
+    }
+    @keyframes scrollBackground {
+      0% { background-position-y: 0; }
+      100% { background-position-y: 1000px; }
     }
     #tsparticles {
       position: fixed;
@@ -20,214 +32,148 @@
       width: 100vw;
       height: 100vh;
       z-index: -1;
+      pointer-events: none;
     }
-    .container {
-      max-width: 100%;
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+      background: linear-gradient(to right, #ffffff, #b48cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulseGlow 3s ease-in-out infinite;
+      text-align: center;
+    }
+    .passe-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.04);
       padding: 30px;
-      text-align: center;
+      border-radius: 18px;
+      box-shadow: 0 0 30px rgba(162, 89, 255, 0.3);
     }
-    h1, h2 {
-      color: #ffb347;
-    }
-    .scroll-container {
-      overflow-x: auto;
-      white-space: nowrap;
-      padding: 20px;
-      margin-bottom: 40px;
-      display: flex;
-      gap: 12px;
-      scroll-snap-type: x mandatory;
-    }
-    .level-box {
-      flex: 0 0 auto;
-      width: 160px;
-      min-height: 120px;
-      background-color: #2e2e30;
+    .nivel {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px;
+      margin: 10px 0;
       border-radius: 10px;
-      padding: 12px 8px;
-      font-size: 0.9rem;
-      text-align: center;
-      transition: 0.3s;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      scroll-snap-align: start;
-      box-shadow: 0 0 10px #00000033;
-      word-wrap: break-word;
-      position: relative;
     }
-    .level-title {
-      font-size: 0.72rem;
-      color: #ccc;
-      text-align: center;
-      margin-top: 8px;
-      max-width: 140px;
-      word-break: break-word;
-      line-height: 1.2em;
+    .nivel span {
+      font-size: 1.2rem;
     }
-    .level-box.unlocked {
-      background: linear-gradient(135deg, #a259ff, #7b2ff7);
-      box-shadow: 0 0 15px #a259ff;
-      color: #fff;
-      font-weight: bold;
-    }
-    .level-box.special {
-      border: 2px solid #ffd700;
-      box-shadow: 0 0 10px #ffd70077, 0 0 20px #ffd70033 inset;
-      animation: pulse 2s infinite ease-in-out;
-    }
-    .level-box.special:hover::after {
-      content: attr(data-title);
-      position: absolute;
-      bottom: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.85);
-      color: #fff;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      white-space: nowrap;
-      z-index: 10;
-    }
-    .premium .level-box {
-      background: #1f1a00;
-      color: #e6c200;
-    }
-    .premium .level-box.unlocked {
-      background: linear-gradient(135deg, #e6c200, #b89100);
-      color: black;
-      box-shadow: 0 0 12px #e6c200aa;
-    }
-    .premium .level-box.special {
-      border: 2px solid #e6c200;
-      box-shadow: 0 0 10px #e6c200aa, 0 0 20px #e6c20055 inset;
-    }
-    .premium .level-box.special:hover::after {
-      content: attr(data-title);
-      position: absolute;
-      bottom: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.85);
-      color: #fff;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      white-space: nowrap;
-      z-index: 10;
-    }
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-    }
-    a {
+    .voltar {
       display: inline-block;
       margin-top: 30px;
-      padding: 10px 20px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      color: white;
       background: linear-gradient(135deg, #a259ff, #7b2ff7);
       border-radius: 14px;
-      color: white;
       text-decoration: none;
-      font-weight: 600;
       box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
+      transition: transform 0.3s ease;
+    }
+    .voltar:hover {
+      transform: translateY(-3px);
+    }
+    @keyframes pulseGlow {
+      0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+      50% { text-shadow: 0 0 25px rgba(255,255,255,0.6); }
     }
   </style>
 </head>
 <body>
   <div id="tsparticles"></div>
-  <div class="container">
-    <h1>🎯 Passe de Batalha – Arla</h1>
-    <div class="scroll-container" id="battle-pass"></div>
-
-    <h2>💎 Passe Premium</h2>
-    <div class="scroll-container premium" id="premium-pass"></div>
-
-    <a href="index.html">🖙 Voltar para o Menu</a>
+  <h1>🎯 Passe de Batalha</h1>
+  <div class="passe-container" id="passe">
+    <!-- Níveis e recompensas serão carregados aqui -->
   </div>
+  <a class="voltar" href="index.html">🔙 Voltar para o Menu</a>
 
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <button id="btn-musica" style="position: fixed; bottom: 20px; left: 20px; background: #7b2ff7; color: white; border: none; padding: 10px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; z-index: 100; box-shadow: 0 0 12px rgba(0,0,0,0.2);">🔊 Tocar Música</button>
+  <audio id="musicaArla" loop>
+    <source src="musica-arla.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
   <script>
     tsParticles.load("tsparticles", {
-      background: { color: { value: "#0e0e10" } },
+      fullScreen: { enable: false },
+      background: { color: "transparent" },
       particles: {
-        color: { value: "#a259ff" },
-        links: { enable: true, color: "#a259ff", distance: 130 },
-        move: { enable: true, speed: 1.4 },
-        size: { value: 2 },
-        number: { value: 60, density: { enable: true, area: 800 } }
+        number: { value: 40, density: { enable: true, area: 800 } },
+        color: { value: ["#ffffff", "#d6b4ff", "#b266ff", "#f7d0ff"] },
+        shape: { type: ["circle", "triangle", "star"] },
+        opacity: { value: 0.5, random: true },
+        size: { value: { min: 10, max: 20 }, random: true },
+        move: {
+          enable: true,
+          speed: 1.2,
+          direction: "top",
+          outModes: "out"
+        },
+        rotate: {
+          value: 0,
+          random: true,
+          direction: "random",
+          animation: { enable: true, speed: 8, sync: false }
+        },
+        shadow: {
+          enable: true,
+          color: "#000",
+          blur: 5,
+          offset: { x: 1, y: 1 }
+        }
       }
     });
 
-    const recompensas = {
-      10: "📺 Compartilhar tela (15 dias)",
-      20: "🣍️ Mover usuários (15 dias)",
-      30: "🛠️ Comando exclusivo na Arla",
-      40: "🌟 Acesso VIP temporário",
-      50: "📺 Compartilhar tela (permanente)"
-    };
+    const btn = document.getElementById("btn-musica");
+    const audio = document.getElementById("musicaArla");
+    let tocando = false;
 
-    const recompensasPremium = {
-      10: "📺 Compartilhar tela (1 mês)",
-      20: "🣍️ Mover usuários (1 mês)",
-      30: "🔠 Resgate 300 XP",
-      40: "💎 Resgate 500 XP",
-      50: "🏆 Compartilhar tela (permanente) + ATIVO DO DISCORD"
-    };
+    window.addEventListener("click", () => {
+      if (!tocando) {
+        audio.play().then(() => {
+          tocando = true;
+          btn.innerText = "🔇 Pausar Música";
+        }).catch(e => console.log("Erro ao tocar automaticamente:", e));
+      }
+    }, { once: true });
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!tocando) {
+        audio.play().then(() => {
+          tocando = true;
+          btn.innerText = "🔇 Pausar Música";
+        }).catch(e => console.log("Erro ao tocar:", e));
+      } else {
+        audio.pause();
+        tocando = false;
+        btn.innerText = "🔊 Tocar Música";
+      }
+    });
 
     fetch("/api/me")
-      .then(res => res.json())
-      .then(({ user_id }) => fetch(`/api/usuario/${user_id}`))
+      .then(res => {
+        if (res.status === 401) {
+          window.location.href = "/login";
+          throw new Error("Usuário não autenticado");
+        }
+        return res.json();
+      })
+      .then(() => fetch("/api/passe"))
       .then(res => res.json())
       .then(data => {
-        const nivelTotal = Math.floor(data.xp / 250);
-
-        const container = document.getElementById("battle-pass");
-        for (let i = 1; i <= 50; i++) {
-          const box = document.createElement("div");
-          box.className = "level-box";
-          if (i <= nivelTotal) box.classList.add("unlocked");
-          if (recompensas[i]) {
-            box.classList.add("special");
-            box.setAttribute("data-title", recompensas[i]);
-          }
-
-          const levelText = document.createElement("div");
-          levelText.textContent = `LVL ${i}`;
-          const levelTitle = document.createElement("div");
-          levelTitle.className = "level-title";
-          levelTitle.textContent = recompensas[i] || `Resgate ${5 + Math.floor(i / 2)} XP`;
-
-          box.appendChild(levelText);
-          box.appendChild(levelTitle);
-          container.appendChild(box);
-        }
-
-        const premium = document.getElementById("premium-pass");
-        for (let i = 1; i <= 50; i++) {
-          const box = document.createElement("div");
-          box.className = "level-box";
-          if (i <= nivelTotal) box.classList.add("unlocked");
-          if (recompensasPremium[i]) {
-            box.classList.add("special");
-            box.setAttribute("data-title", recompensasPremium[i]);
-          }
-
-          const levelText = document.createElement("div");
-          levelText.textContent = `LVL ${i}`;
-          const levelTitle = document.createElement("div");
-          levelTitle.className = "level-title";
-          levelTitle.textContent = recompensasPremium[i] || `Resgate ${15 + Math.floor(i / 2) * 5} XP`;
-
-          box.appendChild(levelText);
-          box.appendChild(levelTitle);
-          premium.appendChild(box);
-        }
+        const container = document.getElementById("passe");
+        data.forEach(item => {
+          const div = document.createElement("div");
+          div.className = "nivel";
+          div.innerHTML = `<span>Nível ${item.nivel}</span><span>${item.recompensa}</span>`;
+          container.appendChild(div);
+        });
       });
   </script>
 </body>
