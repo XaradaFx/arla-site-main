@@ -258,5 +258,39 @@
         }
       });
   </script>
+<script>
+  tsParticles.load("tsparticles", {
+    fullScreen: { enable: false },
+    background: { color: "transparent" },
+    particles: {
+      number: { value: 50, density: { enable: true, area: 800 } },
+      color: { value: ["#ffffff", "#ffccff", "#ffd1e0", "#f7d0ff"] },
+      shape: {
+        type: ["circle", "star", "char"],
+        options: {
+          char: {
+            value: ["💸", "💲", "✨"],
+            font: "Verdana",
+            weight: "400"
+          }
+        }
+      },
+      opacity: { value: 0.6 },
+      size: { value: { min: 6, max: 14 }, random: true },
+      move: {
+        enable: true,
+        speed: 1,
+        direction: "top",
+        outModes: "out"
+      },
+      shadow: {
+        enable: true,
+        color: "#000",
+        blur: 5,
+        offset: { x: 1, y: 1 }
+      }
+    }
+  });
+</script>
 </body>
 </html>
