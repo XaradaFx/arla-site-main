@@ -2,32 +2,17 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8"/>
-  <title>Ranking Tempo em Call - Arla</title>
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet"/>
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <title>Ranking Tempo - Arla</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
-      font-family: 'Comfortaa', cursive;
-      background-color: #a259ff;
-      background-image: url('91a4d4c4-d3cf-47f1-8858-30bdcf9b7209.png');
-      background-size: cover;
-      background-repeat: repeat-y;
-      background-position: center top;
-      animation: scrollBackground 60s linear infinite;
-      min-height: 100vh;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff69b4, #ffc0cb);
+      color: white;
       overflow-x: hidden;
       position: relative;
-      padding: 40px 20px;
-      color: white;
     }
-
-    @keyframes scrollBackground {
-      0% { background-position-y: 0; }
-      100% { background-position-y: 1000px; }
-    }
-
     #tsparticles {
       position: fixed;
       top: 0;
@@ -35,143 +20,150 @@
       width: 100vw;
       height: 100vh;
       z-index: -1;
-      pointer-events: none;
     }
-
+    .container {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 0 20px;
+    }
     h1 {
-      font-size: 3rem;
-      text-align: center;
-      margin-bottom: 30px;
-      background: linear-gradient(90deg, #ffffff, #ffd6ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: fadeInTitle 1.2s ease-in-out;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-    }
-    h1 .emoji {
       font-size: 2.5rem;
-      filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
     }
-    @keyframes fadeInTitle {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .ranking-container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.04);
-      padding: 30px;
-      border-radius: 18px;
-      box-shadow: 0 0 30px rgba(162, 89, 255, 0.3);
-    }
-
-    .usuario {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      margin-bottom: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.05);
-    }
-
-    .usuario.top1 { background: linear-gradient(90deg, #ffd70033, #ffffff05); }
-    .usuario.top2 { background: linear-gradient(90deg, #c0c0c033, #ffffff05); }
-    .usuario.top3 { background: linear-gradient(90deg, #cd7f3233, #ffffff05); }
-
-    .usuario span {
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2px solid white;
-    }
-
-    .voltar {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 12px 25px;
-      font-size: 1rem;
-      color: white;
-      background: linear-gradient(135deg, #a259ff, #7b2ff7);
+    .user {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px 25px;
       border-radius: 14px;
-      text-decoration: none;
-      box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
-      transition: transform 0.3s ease;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border: 1px solid transparent;
+      transition: 0.3s ease;
     }
-
-    .voltar:hover {
+    .user:hover {
+      border: 1px solid #fff;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
       transform: translateY(-3px);
+    }
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #fff;
+      background-size: cover;
+      background-position: center;
+    }
+    .info {
+      flex-grow: 1;
+    }
+    .bar {
+      height: 10px;
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 5px;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff69b4, #ffa6c9);
+      transition: width 0.4s ease;
+    }
+    .value {
+      font-weight: bold;
+      color: #fff;
     }
   </style>
 </head>
 <body>
   <div id="tsparticles"></div>
-  <h1><span class="emoji">⏳</span> Ranking de Tempo em Call</h1>
-  <div class="ranking-container" id="ranking"></div>
-  <a class="voltar" href="index.html">🔙 Voltar para o Menu</a>
+  <div class="container">
+    <h1>⏱️ Ranking Tempo em Call</h1>
+    <div id="ranking">Carregando...</div>
 
+    <div style="text-align:center; margin-top: 40px;">
+      <a href="index.html" onmouseout="this.style.transform='translateY(0)'" onmouseover="this.style.transform='translateY(-3px)'" style="
+        display: inline-block;
+        padding: 12px 25px;
+        font-size: 1rem;
+        color: white;
+        background: linear-gradient(135deg, #ff69b4, #ffb6c1);
+        border-radius: 14px;
+        text-decoration: none;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+        transition: transform 0.3s ease;">
+        🔙 Voltar para o Menu
+      </a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <script>
     tsParticles.load("tsparticles", {
-      fullScreen: { enable: false },
-      background: { color: "transparent" },
+      background: { color: { value: "transparent" } },
       particles: {
-        number: { value: 40, density: { enable: true, area: 800 } },
-        color: { value: ["#ffffff", "#d6b4ff", "#b266ff", "#f7d0ff"] },
-        shape: { type: ["circle", "triangle", "star"] },
-        opacity: { value: 0.5, random: true },
-        size: { value: { min: 10, max: 20 }, random: true },
-        move: { enable: true, speed: 1.2, direction: "top", outModes: "out" },
-        rotate: { value: 0, random: true, direction: "random", animation: { enable: true, speed: 8, sync: false } },
-        shadow: { enable: true, color: "#000", blur: 5, offset: { x: 1, y: 1 } }
-      }
+        number: { value: 60 },
+        color: { value: ["#ffffff", "#ffe4ec", "#ff69b4"] },
+        shape: {
+          type: ["circle", "star", "char"],
+          options: {
+            char: {
+              value: ["★", "♡", "✦"],
+              font: "Verdana",
+              weight: "400"
+            }
+          }
+        },
+        opacity: { value: 0.7 },
+        size: {
+          value: 10,
+          random: { enable: true, minimumValue: 5 }
+        },
+        move: {
+          enable: true,
+          speed: 0.6,
+          direction: "top",
+          outModes: { default: "out" }
+        }
+      },
+      fullScreen: { enable: false }
     });
 
-    fetch("/api/todos")
-      .then(res => res.json())
-      .then(data => {
-        const entries = Object.entries(data)
-          .map(([id, user]) => ({ id, ...user }))
-          .sort((a, b) => b.tempo_total - a.tempo_total)
-          .slice(0, 30);
+    fetch("/api/todos").then(res => res.json()).then(async data => {
+      const lista = Object.entries(data)
+        .map(([id, val]) => ({ id, tempo: val.tempo_total || 0 }))
+        .sort((a, b) => b.tempo - a.tempo);
 
-        const container = document.getElementById("ranking");
+      const maiorTempo = lista[0]?.tempo || 1;
+      const container = document.getElementById("ranking");
+      container.innerHTML = "";
 
-        const promessas = entries.map((usuario, index) => {
-          return fetch(`/api/avatar/${usuario.id}`)
-            .then(res => res.json())
-            .then(avatar => {
-              return {
-                index,
-                html: `
-                  <div class="usuario ${index === 0 ? 'top1' : index === 1 ? 'top2' : index === 2 ? 'top3' : ''}">
-                    <span>#${index + 1}</span>
-                    <span><img src="${avatar.url}" class="avatar">${avatar.name}</span>
-                    <span>${usuario.tempo_total} min</span>
-                  </div>
-                `
-              };
-            });
-        });
+      for (let i = 0; i < lista.length; i++) {
+        const user = lista[i];
+        const percent = Math.min((user.tempo / maiorTempo) * 100, 100).toFixed(1);
 
-        Promise.all(promessas).then(resultados => {
-          resultados.sort((a, b) => a.index - b.index).forEach(r => {
-            container.innerHTML += r.html;
-          });
-        });
-      });
+        const res = await fetch(`/api/avatar/${user.id}`);
+        const avatarData = await res.json();
+
+        const avatarUrl = avatarData.url || "https://cdn.discordapp.com/embed/avatars/0.png";
+        const nome = avatarData.name || `ID: ${user.id}`;
+
+        const div = document.createElement("div");
+        div.className = "user";
+        div.innerHTML = `
+          <div class="avatar" style="background-image: url('${avatarUrl}')"></div>
+          <div class="info">
+            <div>#${i + 1} • ${nome}</div>
+            <div class="bar"><div class="bar-fill" style="width:${percent}%"></div></div>
+          </div>
+          <div class="value">${user.tempo} min</div>
+        `;
+        container.appendChild(div);
+      }
+    });
   </script>
 </body>
 </html>
