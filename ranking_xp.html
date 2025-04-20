@@ -1,3 +1,4 @@
+<!-- substitua TODO o conteúdo do seu ranking_xp.html por este -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,9 +9,10 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: #0e0e10;
+      background: linear-gradient(135deg, #ff69b4, #ffc0cb);
       color: white;
       overflow-x: hidden;
+      position: relative;
     }
     #tsparticles {
       position: fixed;
@@ -27,13 +29,13 @@
     }
     h1 {
       font-size: 2.5rem;
-      color: #a259ff;
+      color: #ffffff;
       text-align: center;
       margin-bottom: 40px;
-      text-shadow: 0 0 10px rgba(162, 89, 255, 0.6);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
     }
     .user {
-      background: rgba(255,255,255,0.04);
+      background: rgba(255, 255, 255, 0.1);
       padding: 15px 25px;
       border-radius: 14px;
       margin-bottom: 15px;
@@ -44,15 +46,15 @@
       transition: 0.3s ease;
     }
     .user:hover {
-      border: 1px solid #a259ff;
-      box-shadow: 0 0 10px rgba(162, 89, 255, 0.3);
+      border: 1px solid #fff;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
       transform: translateY(-3px);
     }
     .avatar {
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background-color: #333;
+      background-color: #fff;
       background-size: cover;
       background-position: center;
     }
@@ -61,25 +63,26 @@
     }
     .bar {
       height: 10px;
-      background: #333;
+      background: #fff;
       border-radius: 6px;
       overflow: hidden;
       margin-top: 5px;
     }
     .bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, #a259ff, #7b2ff7);
+      background: linear-gradient(90deg, #ff69b4, #ffa6c9);
       transition: width 0.4s ease;
     }
     .value {
       font-weight: bold;
+      color: #fff;
     }
   </style>
 </head>
 <body>
   <div id="tsparticles"></div>
   <div class="container">
-    <h1>🏆 Ranking XP com Avatar</h1>
+    <h1>🌟 Ranking XP com Avatar</h1>
     <div id="ranking">Carregando...</div>
 
     <div style="text-align:center; margin-top: 40px;">
@@ -88,10 +91,10 @@
         padding: 12px 25px;
         font-size: 1rem;
         color: white;
-        background: linear-gradient(135deg, #a259ff, #7b2ff7);
+        background: linear-gradient(135deg, #ff69b4, #ffb6c1);
         border-radius: 14px;
         text-decoration: none;
-        box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         transition: transform 0.3s ease;">
         🔙 Voltar para o Menu
       </a>
@@ -101,13 +104,47 @@
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
   <script>
     tsParticles.load("tsparticles", {
-      background: { color: { value: "#0e0e10" } },
+      background: {
+        color: {
+          value: "transparent"
+        }
+      },
       particles: {
-        color: { value: "#a259ff" },
-        links: { enable: true, color: "#a259ff", distance: 130 },
-        move: { enable: true, speed: 1.2 },
-        size: { value: 2 },
-        number: { value: 70, density: { enable: true, area: 800 } }
+        number: {
+          value: 60
+        },
+        color: {
+          value: ["#ffffff", "#ffe4ec", "#ff69b4"]
+        },
+        shape: {
+          type: ["circle", "star", "char"],
+          options: {
+            char: {
+              value: ["★", "♡", "✦"],
+              font: "Verdana",
+              style: "",
+              weight: "400"
+            }
+          }
+        },
+        opacity: {
+          value: 0.7
+        },
+        size: {
+          value: 10,
+          random: { enable: true, minimumValue: 5 }
+        },
+        move: {
+          enable: true,
+          speed: 0.6,
+          direction: "top",
+          outModes: {
+            default: "out"
+          }
+        }
+      },
+      fullScreen: {
+        enable: false
       }
     });
 
