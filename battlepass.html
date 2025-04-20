@@ -184,7 +184,7 @@
         data.free.forEach(item => {
           const div = document.createElement("div");
           div.className = "nivel";
-          if (item.desbloqueado) div.style.border = "1px solid #fff";
+          if (item.desbloqueado) div.style.border = "1px solid white";
           div.innerHTML = `<span>Nível ${item.nivel}</span><span>${item.recompensa}</span>`;
           freeContainer.appendChild(div);
         });
