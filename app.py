@@ -123,6 +123,44 @@ def get_avatar(user_id):
 def home():
     return send_from_directory('.', 'index.html')
 
+@app.route("/api/passe")
+def get_passe():
+    try:
+        with open("dados.json", "r", encoding="utf-8") as f:
+            dados = json.load(f)
+
+        user_id = session.get("user_id")
+        if not user_id:
+            return "Não autenticado", 401
+
+        usuario = dados.get(str(user_id), {})
+        xp = usuario.get("xp", 0)
+        nivel = xp // 250
+
+        recompensas = []
+        for i in range(1, 51):
+            recompensa = f"Resgate {5 + (i // 2)} XP"
+            if i in [5, 10, 15, 20, 25, 30]:
+                recompensa = {
+                    5: "📺 Compartilhar tela por 5 dias",
+                    10: "🎁 Resgate 40 XP",
+                    15: "📺 Compartilhar tela por 5 dias",
+                    20: "🎁 Resgate 80 XP",
+                    25: "📺 Compartilhar tela por 5 dias",
+                    30: "🛠️ Comando exclusivo na Arla"
+                }.get(i, recompensa)
+            desbloqueado = i <= nivel
+            recompensas.append({
+                "nivel": i,
+                "recompensa": recompensa,
+                "desbloqueado": desbloqueado
+            })
+
+        return jsonify(recompensas)
+
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 500
+
 @app.route("/api/ranking/xp")
 def ranking_xp():
     try:
