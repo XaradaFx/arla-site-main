@@ -9,8 +9,10 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background-color: #0e0e10;
+      background: linear-gradient(135deg, #ff69b4, #ffc0cb);
       color: white;
+      overflow-x: hidden;
+      position: relative;
     }
 
     #tsparticles {
@@ -27,31 +29,31 @@
       margin: 80px auto;
       padding: 30px;
       border-radius: 16px;
-      background: rgba(255,255,255,0.04);
-      box-shadow: 0 0 30px rgba(162, 89, 255, 0.3);
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
     }
 
     h1 {
-      color: #a259ff;
+      color: #ffffff;
       text-align: center;
       margin-bottom: 30px;
-      text-shadow: 0 0 10px rgba(162, 89, 255, 0.6);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
     }
 
     .card {
       background-color: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(162, 89, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 14px;
       padding: 20px;
       margin: 20px 0;
-      box-shadow: 0 0 10px rgba(162, 89, 255, 0.15);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .card h3 {
-      color: #a259ff;
+      color: #fff;
       margin-bottom: 8px;
     }
 
@@ -75,7 +77,7 @@
 
     .bar-fill {
       height: 100%;
-      background: linear-gradient(to right, #67ff94, #a259ff);
+      background: linear-gradient(to right, #ff69b4, #ffa6c9);
       width: 65%;
       animation: growBar 3s ease-out;
     }
@@ -88,8 +90,8 @@
     .badge {
       padding: 4px 10px;
       border-radius: 20px;
-      background-color: #a259ff;
-      color: white;
+      background-color: #fff;
+      color: #ff69b4;
       font-size: 0.8rem;
       margin-top: 5px;
     }
@@ -100,10 +102,10 @@
       padding: 12px 25px;
       font-size: 1rem;
       color: white;
-      background: linear-gradient(135deg, #a259ff, #7b2ff7);
+      background: linear-gradient(135deg, #ff69b4, #ffb6c1);
       border-radius: 14px;
       text-decoration: none;
-      box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
       transition: transform 0.3s ease;
       text-align: center;
     }
@@ -130,8 +132,8 @@
     </div>
   </div>
   <div class="rendimento-area">
-    <h3 style="color: #a259ff">💹 Crescimento futuro dos seus Xaracoins</h3>
-    <p style="color: #bbb; margin-top: 5px;">Valor simulado com base na sua média de ganho atual.</p>
+    <h3 style="color: #fff;">💹 Crescimento futuro dos seus Xaracoins</h3>
+    <p style="color: #eee; margin-top: 5px;">Valor simulado com base na sua média de ganho atual.</p>
   </div>
   <div style="text-align:center;">
     <a href="index.html" class="voltar">🔙 Voltar para o Menu</a>
@@ -140,14 +142,30 @@
 
 <script>
   tsParticles.load("tsparticles", {
-    background: { color: { value: "#0e0e10" } },
+    background: { color: { value: "transparent" } },
     particles: {
-      color: { value: "#a259ff" },
-      links: { enable: true, color: "#a259ff", distance: 130 },
-      move: { enable: true, speed: 1.2 },
-      size: { value: 2 },
-      number: { value: 60, density: { enable: true, area: 800 } }
-    }
+      number: { value: 60 },
+      color: { value: ["#ffffff", "#ffe4ec", "#ff69b4"] },
+      shape: {
+        type: ["circle", "star", "char"],
+        options: {
+          char: {
+            value: ["★", "♡", "✦"],
+            font: "Verdana",
+            weight: "400"
+          }
+        }
+      },
+      opacity: { value: 0.7 },
+      size: { value: 10, random: { enable: true, minimumValue: 5 } },
+      move: {
+        enable: true,
+        speed: 0.6,
+        direction: "top",
+        outModes: { default: "out" }
+      }
+    },
+    fullScreen: { enable: false }
   });
 
   fetch("/api/me")
