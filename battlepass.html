@@ -194,6 +194,16 @@
       font-weight: 600;
       box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
     }
+    <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Passe de Batalha - Arla</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <style>
+    ... (estilo mantido igual)
   </style>
 </head>
 <body>
@@ -220,158 +230,39 @@
       .then(data => {
         const nivelTotal = Math.floor(data.xp / 250);
 
-        const recompensasSobrecarga = {
-          55: "💸 50 Xaracoins",
-          56: "🎬 Netflix (1 mês)",
-          57: "🍥 Crunchyroll (1 mês)",
-          58: "💸 100 Xaracoins",
-          60: "⚡ Discord Nitro"
+        const recompensas = {
+          1: "🎁 5 XP", 2: "🎁 6 XP", 3: "💸 1 Xaracoin", 4: "🎁 7 XP", 5: "🎁 8 XP",
+          6: "🎁 8 XP", 7: "💸 2 Xaracoins", 8: "🎁 9 XP", 9: "🎁 9 XP", 10: "🎁 10 XP",
+          11: "🎁 10 XP", 12: "💸 3 Xaracoins", 13: "🎁 11 XP", 14: "🎁 11 XP",
+          15: "🎁 12 XP", 16: "🎁 12 XP", 17: "💸 4 Xaracoins", 18: "🎁 13 XP",
+          19: "🎁 13 XP", 20: "🎁 15 XP", 21: "🎁 15 XP", 22: "💸 6 Xaracoins",
+          23: "🎁 20 XP", 24: "🎁 20 XP", 25: "📺 Compartilhar tela (5 dias)",
+          27: "💸 8 Xaracoins", 28: "🣍️ Mover usuários (5 dias)", 30: "🧪 130 XP",
+          31: "💸 10 Xaracoins", 33: "📺 Compartilhar tela (5 dias)",
+          35: "💸 12 Xaracoins", 36: "🧪 140 XP", 38: "💸 12 Xaracoins",
+          39: "🣍️ Mover usuários (5 dias)", 40: "💸 12 Xaracoins"
         };
 
-        const container = document.getElementById("sobrecarga-pass");
-        for (let i = 55; i <= 60; i++) {
-          const box = document.createElement("div");
-          box.className = "level-box";
-          if (i <= nivelTotal) box.classList.add("unlocked");
-          if (recompensasSobrecarga[i]) {
-            box.classList.add("special");
-            box.setAttribute("data-title", recompensasSobrecarga[i]);
-          }
+        const recompensasPremium = {
+          1: "🎁 15 XP", 2: "🎁 20 XP", 3: "💸 2 Xaracoins", 4: "🎁 20 XP", 5: "🎁 25 XP",
+          6: "🎁 30 XP", 7: "💸 3 Xaracoins", 8: "🎁 35 XP", 9: "🎁 35 XP", 10: "🎁 40 XP",
+          11: "🎁 40 XP", 12: "💸 4 Xaracoins", 13: "🎁 45 XP", 14: "🎁 45 XP",
+          15: "🎁 50 XP", 16: "🎁 55 XP", 17: "💸 5 Xaracoins", 18: "🎁 60 XP",
+          19: "🎁 60 XP", 20: "🎁 65 XP", 21: "🎁 65 XP", 22: "💸 8 Xaracoins",
+          23: "🎁 70 XP", 24: "🎁 80 XP", 25: "📺 Compartilhar tela (10 dias)",
+          27: "💸 10 Xaracoins", 28: "🣍️ Mover usuários (10 dias)", 30: "🧪 300 XP",
+          31: "💸 12 Xaracoins", 33: "📺 Compartilhar tela (10 dias)",
+          35: "💸 13 Xaracoins", 36: "🧪 400 XP", 38: "💸 14 Xaracoins",
+          39: "🣍️ Mover usuários (10 dias)", 40: "🏆 59 Xaracoins + Ativo do Discord"
+        };
 
-          const levelText = document.createElement("div");
-          levelText.textContent = `LVL ${i}`;
-          const levelTitle = document.createElement("div");
-          levelTitle.className = "level-title";
-          levelTitle.textContent = recompensasSobrecarga[i] || `🎁 Super XP`;
+        const recompensasSobrecarga = {
+          55: "💸 50 Xaracoins", 56: "🎬 Netflix (1 mês)",
+          57: "🍥 Crunchyroll (1 mês)", 58: "💸 100 Xaracoins",
+          59: "🎁 Super XP", 60: "⚡ Discord Nitro"
+        };
 
-          box.appendChild(levelText);
-          box.appendChild(levelTitle);
-          container.appendChild(box);
-        }
-      });
-  </script>
-  <script>
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    a {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 10px 20px;
-      background: linear-gradient(135deg, #a259ff, #7b2ff7);
-      border-radius: 14px;
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
-    }
-  </style>
-</head>
-<body>
-  <div id="tsparticles"></div>
-  <div class="container">
-    <h1>🎯 Passe de Batalha – Arla</h1>
-    <div class="scroll-container" id="battle-pass"></div>
-
-    <h2>💎 Passe Premium</h2>
-    <div class="scroll-container premium" id="premium-pass"></div>
-
-    <a href="index.html">🖙 Voltar para o Menu</a>
-  </div>
-
-  <script>
-    // Autenticação obrigatória
-    fetch("/api/me")
-      .then(res => {
-        if (res.status === 401) window.location.href = "/login";
-        return res.json();
-      })
-      .then(({ user_id }) => fetch(`/api/usuario/${user_id}`))
-      .then(res => res.json())
-      .then(data => {
-        const nivelTotal = Math.floor(data.xp / 250);
-
-        const recompensas = {
-  1: "🎁 5 XP",
-  2: "🎁 6 XP",
-  3: "💸 1 Xaracoin",
-  4: "🎁 7 XP",
-  5: "🎁 8 XP",
-  6: "🎁 8 XP",
-  7: "💸 2 Xaracoins",
-  8: "🎁 9 XP",
-  9: "🎁 9 XP",
-  10: "🎁 10 XP",
-  11: "🎁 10 XP",
-  12: "💸 3 Xaracoins",
-  13: "🎁 11 XP",
-  14: "🎁 11 XP",
-  15: "🎁 12 XP",
-  16: "🎁 12 XP",
-  17: "💸 4 Xaracoins",
-  18: "🎁 13 XP",
-  19: "🎁 13 XP",
-  20: "🎁 15 XP",
-  21: "🎁 15 XP",
-  22: "💸 6 Xaracoins",
-  23: "🎁 20 XP",
-  24: "🎁 20 XP",
-  25: "📺 Compartilhar tela (5 dias)",
-  27: "💸 8 Xaracoins",
-  28: "🣍️ Mover usuários (5 dias)",
-  30: "🧪 130 XP",
-  31: "💸 10 Xaracoins",
-  33: "📺 Compartilhar tela (5 dias)",
-  35: "💸 12 Xaracoins",
-  36: "🧪 140 XP",
-  38: "💸 12 Xaracoins",
-  39: "🣍️ Mover usuários (5 dias)",
-  40: "💸 12 Xaracoins"
-};
-
-const recompensasPremium = {
-  1: "🎁 15 XP",
-  2: "🎁 20 XP",
-  3: "💸 2 Xaracoins",
-  4: "🎁 20 XP",
-  5: "🎁 25 XP",
-  6: "🎁 30 XP",
-  7: "💸 3 Xaracoins",
-  8: "🎁 35 XP",
-  9: "🎁 35 XP",
-  10: "🎁 40 XP",
-  11: "🎁 40 XP",
-  12: "💸 4 Xaracoins",
-  13: "🎁 45 XP",
-  14: "🎁 45 XP",
-  15: "🎁 50 XP",
-  16: "🎁 55 XP",
-  17: "💸 5 Xaracoins",
-  18: "🎁 60 XP",
-  19: "🎁 60 XP",
-  20: "🎁 65 XP",
-  21: "🎁 65 XP",
-  22: "💸 8 Xaracoins",
-  23: "🎁 70 XP",
-  24: "🎁 80 XP",
-  25: "📺 Compartilhar tela (10 dias)",
-  27: "💸 10 Xaracoins",
-  28: "🣍️ Mover usuários (10 dias)",
-  30: "🧪 300 XP",
-  31: "💸 12 Xaracoins",
-  33: "📺 Compartilhar tela (10 dias)",
-  35: "💸 13 Xaracoins",
-  36: "🧪 400 XP",
-  38: "💸 14 Xaracoins",
-  39: "🣍️ Mover usuários (10 dias)",
-  40: "🏆 59 Xaracoins + Ativo do Discord"
-};
-
-
-        const container = document.getElementById("battle-pass");
+        const comum = document.getElementById("battle-pass");
         for (let i = 1; i <= 40; i++) {
           const box = document.createElement("div");
           box.className = "level-box";
@@ -380,16 +271,8 @@ const recompensasPremium = {
             box.classList.add("special");
             box.setAttribute("data-title", recompensas[i]);
           }
-
-          const levelText = document.createElement("div");
-          levelText.textContent = `LVL ${i}`;
-          const levelTitle = document.createElement("div");
-          levelTitle.className = "level-title";
-          levelTitle.textContent = recompensas[i] || `🎁 XP extra`;
-
-          box.appendChild(levelText);
-          box.appendChild(levelTitle);
-          container.appendChild(box);
+          box.innerHTML = `<div>LVL ${i}</div><div class="level-title">${recompensas[i] || "🎁 XP extra"}</div>`;
+          comum.appendChild(box);
         }
 
         const premium = document.getElementById("premium-pass");
@@ -401,52 +284,57 @@ const recompensasPremium = {
             box.classList.add("special");
             box.setAttribute("data-title", recompensasPremium[i]);
           }
-
-          const levelText = document.createElement("div");
-          levelText.textContent = `LVL ${i}`;
-          const levelTitle = document.createElement("div");
-          levelTitle.className = "level-title";
-          levelTitle.textContent = recompensasPremium[i] || `🎁 XP Premium`;
-
-          box.appendChild(levelText);
-          box.appendChild(levelTitle);
+          box.innerHTML = `<div>LVL ${i}</div><div class="level-title">${recompensasPremium[i] || "🎁 XP Premium"}</div>`;
           premium.appendChild(box);
+        }
+
+        const sobrecarga = document.getElementById("sobrecarga-pass");
+        for (let i = 55; i <= 60; i++) {
+          const box = document.createElement("div");
+          box.className = "level-box";
+          if (i <= nivelTotal) box.classList.add("unlocked");
+          if (recompensasSobrecarga[i]) {
+            box.classList.add("special");
+            box.setAttribute("data-title", recompensasSobrecarga[i]);
+          }
+          box.innerHTML = `<div>LVL ${i}</div><div class="level-title">${recompensasSobrecarga[i] || "🎁 Super XP"}</div>`;
+          sobrecarga.appendChild(box);
         }
       });
   </script>
-<script>
-  tsParticles.load("tsparticles", {
-    fullScreen: { enable: false },
-    background: { color: "transparent" },
-    particles: {
-      number: { value: 50, density: { enable: true, area: 800 } },
-      color: { value: ["#ffffff", "#ffccff", "#ffd1e0", "#f7d0ff"] },
-      shape: {
-        type: ["circle", "star", "char"],
-        options: {
-          char: {
-            value: ["💸", "💲", "✨"],
-            font: "Verdana",
-            weight: "400"
+  <script>
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: false },
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 50, density: { enable: true, area: 800 } },
+        color: { value: ["#ffffff", "#ffccff", "#ffd1e0", "#f7d0ff"] },
+        shape: {
+          type: ["circle", "star", "char"],
+          options: {
+            char: {
+              value: ["💸", "💲", "✨"],
+              font: "Verdana",
+              weight: "400"
+            }
           }
+        },
+        opacity: { value: 0.6 },
+        size: { value: { min: 6, max: 14 }, random: true },
+        move: {
+          enable: true,
+          speed: 1,
+          direction: "top",
+          outModes: "out"
+        },
+        shadow: {
+          enable: true,
+          color: "#000",
+          blur: 5,
+          offset: { x: 1, y: 1 }
         }
-      },
-      opacity: { value: 0.6 },
-      size: { value: { min: 6, max: 14 }, random: true },
-      move: {
-        enable: true,
-        speed: 1,
-        direction: "top",
-        outModes: "out"
-      },
-      shadow: {
-        enable: true,
-        color: "#000",
-        blur: 5,
-        offset: { x: 1, y: 1 }
       }
-    }
-  });
-</script>
+    });
+  </script>
 </body>
 </html>
