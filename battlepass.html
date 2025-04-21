@@ -147,6 +147,111 @@
       z-index: 10;
     }
 
+    .sobrecarga {
+      background: linear-gradient(to right, #ff0080, #7928ca);
+    }
+
+    .sobrecarga .level-box {
+      background: #3d003f;
+      color: #ff80ff;
+    }
+
+    .sobrecarga .level-box.unlocked {
+      background: linear-gradient(135deg, #ff0080, #ffccff);
+      color: white;
+      box-shadow: 0 0 15px #ff33ccaa;
+    }
+
+    .sobrecarga .level-box.special {
+      border: 2px solid #ff80ff;
+      box-shadow: 0 0 10px #ff80ffaa, 0 0 20px #ffb3ff55 inset;
+    }
+
+    .sobrecarga-msg {
+      font-size: 0.9rem;
+      color: #ffd6fb;
+      margin: 12px auto 32px;
+      background: rgba(255, 0, 128, 0.15);
+      border: 1px solid #ff80ff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      max-width: 480px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #a259ff, #7b2ff7);
+      border-radius: 14px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 0 15px rgba(162, 89, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div id="tsparticles"></div>
+  <div class="container">
+    <h1>🎯 Passe de Batalha – Arla</h1>
+    <div class="scroll-container" id="battle-pass"></div>
+
+    <h2>💎 Passe Premium</h2>
+    <div class="scroll-container premium" id="premium-pass"></div>
+
+    <h3>⚡ Passe de SOBRECARGA ⚡</h3>
+    <div class="sobrecarga-msg">Para desbloquear a Sobrecarga, é necessário ter o Passe Premium ativo.</div>
+    <div class="scroll-container sobrecarga" id="sobrecarga-pass"></div>
+
+    <a href="index.html">🖙 Voltar para o Menu</a>
+  </div>
+
+  <script>
+    fetch("/api/me")
+      .then(res => res.status === 401 ? window.location.href = "/login" : res.json())
+      .then(({ user_id }) => fetch(`/api/usuario/${user_id}`))
+      .then(res => res.json())
+      .then(data => {
+        const nivelTotal = Math.floor(data.xp / 250);
+
+        const recompensasSobrecarga = {
+          55: "💸 50 Xaracoins",
+          56: "🎬 Netflix (1 mês)",
+          57: "🍥 Crunchyroll (1 mês)",
+          58: "💸 100 Xaracoins",
+          60: "⚡ Discord Nitro"
+        };
+
+        const container = document.getElementById("sobrecarga-pass");
+        for (let i = 55; i <= 60; i++) {
+          const box = document.createElement("div");
+          box.className = "level-box";
+          if (i <= nivelTotal) box.classList.add("unlocked");
+          if (recompensasSobrecarga[i]) {
+            box.classList.add("special");
+            box.setAttribute("data-title", recompensasSobrecarga[i]);
+          }
+
+          const levelText = document.createElement("div");
+          levelText.textContent = `LVL ${i}`;
+          const levelTitle = document.createElement("div");
+          levelTitle.className = "level-title";
+          levelTitle.textContent = recompensasSobrecarga[i] || `🎁 Super XP`;
+
+          box.appendChild(levelText);
+          box.appendChild(levelTitle);
+          container.appendChild(box);
+        }
+      });
+  </script>
+  <script>
+
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.05); }
